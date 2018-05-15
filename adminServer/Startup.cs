@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using adminServer.Domain.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,6 +24,9 @@ namespace adminServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            string connectionString = Environment.GetEnvironmentVariable("connectionString");
+            services.AddDbContext<TestContext>(options => 
+                options.UseSqlServer(connectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -13,6 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Domain\Interfaces\" />
+    <Folder Include="Domain\Implementation\" />
     <Folder Include="Models\" />
   </ItemGroup>
 
