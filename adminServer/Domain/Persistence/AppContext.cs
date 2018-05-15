@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace adminServer.Domain.Persistence
 {
-    class TestContext : DbContext
+    class AppContext : DbContext
     {
         public DbSet<UserEntity> Users { get; set; }
-        public TestContext(DbContextOptions<TestContext> options)
+        public AppContext(DbContextOptions<AppContext> options)
             : base(options) { }
     }
 }

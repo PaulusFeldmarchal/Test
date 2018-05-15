@@ -10,7 +10,7 @@ using System;
 
 namespace adminServer.Migrations
 {
-    [DbContext(typeof(TestContext))]
+    [DbContext(typeof(Domain.Persistence.AppContext))]
     partial class TestContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

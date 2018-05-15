@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using adminServer.Domain.Implementation;
+using adminServer.Domain.Interfaces;
 using adminServer.Domain.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,9 +25,11 @@ namespace adminServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IUserService, UserService>();
+            services.AddSingleton<IRepository, DBRepository>();
             services.AddMvc();
             string connectionString = Environment.GetEnvironmentVariable("connectionString");
-            services.AddDbContext<TestContext>(options => 
+            services.AddDbContext<Domain.Persistence.AppContext>(options => 
                 options.UseSqlServer(connectionString));
         }
 
