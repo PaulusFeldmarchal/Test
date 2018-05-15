@@ -4,6 +4,11 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
+    <GenerateSerializationAssemblies></GenerateSerializationAssemblies>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
   </ItemGroup>
@@ -13,9 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\Interfaces\" />
     <Folder Include="Domain\Implementation\" />
-    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>
