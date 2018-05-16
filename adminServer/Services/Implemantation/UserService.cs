@@ -5,14 +5,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using adminServer.Services.Interfaces;
 
-namespace adminServer.Domain.Implementation
+namespace adminServer.Services.Implementation
 {
     public class UserService : IUserService
     {
         private readonly IRepository _repository;
 
-        UserService(IRepository repository)
+        public UserService(IRepository repository)
         {
             _repository = repository;
         }
@@ -26,13 +27,11 @@ namespace adminServer.Domain.Implementation
             });
         }
 
-        public async Task Delete(UserModel model)
+        public async Task Delete(int id)
         {
             UserEntity entity = new UserEntity
             {
-                Id = model.Id,
-                Name = model.FirstName + ' ' + model.LastName,
-                Age = model.Age
+                Id = id
             };
             await _repository.DeleteAsync(entity);
         }
@@ -50,10 +49,10 @@ namespace adminServer.Domain.Implementation
             };
         }
 
-        public IList<UserModel> GetAll()
+        public async Task<IList<UserModel>> GetAll()
         {
             IList<UserModel> result = new List<UserModel>();
-            IList<UserEntity> entities = _repository.GetAll();
+            IList<UserEntity> entities = await _repository.GetAll();
 
             foreach(UserEntity entity in entities)
             {
@@ -70,9 +69,9 @@ namespace adminServer.Domain.Implementation
             return result;
         }
 
-        public void Update(UserModel model)
+        public async Task Update(UserModel model)
         {
-            _repository.Update(new UserEntity
+            await _repository.Update(new UserEntity
             {
                 Id = model.Id,
                 Name = model.FirstName + ' ' + model.LastName,

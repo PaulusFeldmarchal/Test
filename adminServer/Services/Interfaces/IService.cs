@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace adminServer.Domain.Interfaces
+namespace adminServer.Services.Interfaces
 {
     public interface IUserService
     {
-        IList<UserModel> GetAll();
+        Task<IList<UserModel>> GetAll();
         Task<UserModel> Get(int id);
-        void Update(UserModel model);
+        Task Update(UserModel model);
         Task Add(UserModel model);
         Task Delete(int id);
     }

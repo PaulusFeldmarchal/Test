@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using adminServer.Domain.Implementation;
 using adminServer.Domain.Interfaces;
 using adminServer.Domain.Persistence;
+using adminServer.Services.Implementation;
+using adminServer.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -25,12 +27,13 @@ namespace adminServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IUserService, UserService>();
-            services.AddSingleton<IRepository, DBRepository>();
             services.AddMvc();
             string connectionString = Environment.GetEnvironmentVariable("connectionString");
             services.AddDbContext<ApplicationContext>(options => 
                 options.UseSqlServer(connectionString));
+            services.AddScoped<IRepository, DBRepository>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ApplicationContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

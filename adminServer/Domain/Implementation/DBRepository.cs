@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace adminServer.Domain.Implementation
 {
@@ -12,7 +13,7 @@ namespace adminServer.Domain.Implementation
     {
         private readonly ApplicationContext _context;
 
-        DBRepository(ApplicationContext context)
+        public DBRepository(ApplicationContext context)
         {
             _context = context;
         }
@@ -34,14 +35,14 @@ namespace adminServer.Domain.Implementation
             return await _context.Users.FindAsync(id);
         }
 
-        public IList<UserEntity> GetAll()
+        public async Task<IList<UserEntity>> GetAll()
         {
-            return _context.Users.ToList();
+            return await _context.Users.ToListAsync();
         }
 
-        public void Update(UserEntity model)
+        public async Task Update(UserEntity model)
         {
-            _context.Users.Update(model);
+            await _context.SaveChangesAsync();
         }
     }
 }

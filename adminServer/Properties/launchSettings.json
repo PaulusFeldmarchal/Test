@@ -12,7 +12,7 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "connectionString": "\"Server=DESKTOP-2FC63SQ;Database=adminserverdb;Trusted_Connection=True;\"",
+        "connectionString": "Server=DESKTOP-2FC63SQ;Database=adminserverdb;Trusted_Connection=True;",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },

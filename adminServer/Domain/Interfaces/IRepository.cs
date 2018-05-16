@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace adminServer.Domain.Interfaces
 {
-    internal interface IRepository
+    public interface IRepository
     {
-        IList<UserEntity> GetAll();
+        Task<IList<UserEntity>> GetAll();
         Task<UserEntity> GetAsync(int id);
-        void Update(UserEntity model);
+        Task Update(UserEntity model);
         Task AddAsync(UserEntity model);
         Task DeleteAsync(UserEntity model);
     }
