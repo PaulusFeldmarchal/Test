@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace adminServer.Domain.Interfaces
 {
-    public interface IUserService : IDisposable
+    public interface IUserService
     {
         Task<IList<UserModel>> GetAll();
         Task<UserModel> Get(int id);

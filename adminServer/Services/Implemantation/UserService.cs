@@ -27,11 +27,6 @@ namespace adminServer.Domain.Implementation
             throw new NotImplementedException();
         }
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
         public Task<UserModel> Get(int id)
         {
             throw new NotImplementedException();

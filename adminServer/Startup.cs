@@ -29,7 +29,7 @@ namespace adminServer
             services.AddSingleton<IRepository, DBRepository>();
             services.AddMvc();
             string connectionString = Environment.GetEnvironmentVariable("connectionString");
-            services.AddDbContext<Domain.Persistence.AppContext>(options => 
+            services.AddDbContext<ApplicationContext>(options => 
                 options.UseSqlServer(connectionString));
         }
 

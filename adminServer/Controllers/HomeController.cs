@@ -11,11 +11,11 @@ namespace adminServer.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IUserService _testService;
+        private readonly IUserService _service;
 
-        public HomeController(IUserService testService)
+        public HomeController(IUserService service)
         {
-            _testService = testService;
+            _service = service;
         }
 
 

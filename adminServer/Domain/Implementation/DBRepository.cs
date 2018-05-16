@@ -10,41 +10,38 @@ namespace adminServer.Domain.Implementation
 {
     public class DBRepository : IRepository
     {
-        private readonly Persistence.AppContext _context;
+        private readonly ApplicationContext _context;
 
-        DBRepository(Persistence.AppContext context)
+        DBRepository(ApplicationContext context)
         {
             _context = context;
         }
 
-        public Task Add(UserEntity model)
+        public async Task AddAsync(UserEntity model)
         {
-            throw new NotImplementedException();
+            await _context.Users.AddAsync(model);
+            await _context.SaveChangesAsync();
         }
 
-        public Task Delete(int id)
+        public async Task Delete(UserEntity model)
         {
-            throw new NotImplementedException();
+            _context.Users.Remove(model);
+            await _context.SaveChangesAsync();
         }
 
-        public void Dispose()
+        public async Task<UserEntity> Get(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Users.FindAsync(id);
         }
 
-        public Task<UserEntity> Get(int id)
+        public IList<UserEntity> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Users.ToList();
         }
 
-        public Task<IList<UserEntity>> GetAll()
+        public void Update(UserEntity model)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task Update(UserEntity model)
-        {
-            throw new NotImplementedException();
+            _context.Users.Update(model);
         }
     }
 }
