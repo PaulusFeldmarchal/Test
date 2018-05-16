@@ -8,9 +8,9 @@ namespace adminServer.Domain.Interfaces
 {
     public interface IUserService
     {
-        Task<IList<UserModel>> GetAll();
+        IList<UserModel> GetAll();
         Task<UserModel> Get(int id);
-        Task Update(UserModel model);
+        void Update(UserModel model);
         Task Add(UserModel model);
         Task Delete(int id);
     }

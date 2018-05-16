@@ -17,29 +17,67 @@ namespace adminServer.Domain.Implementation
             _repository = repository;
         }
 
-        public Task Add(UserModel model)
+        public async Task Add(UserModel model)
         {
-            throw new NotImplementedException();
+            await _repository.AddAsync(new UserEntity
+            {
+                Name = model.FirstName + ' ' + model.LastName,
+                Age = model.Age
+            });
         }
 
-        public Task Delete(int id)
+        public async Task Delete(UserModel model)
         {
-            throw new NotImplementedException();
+            UserEntity entity = new UserEntity
+            {
+                Id = model.Id,
+                Name = model.FirstName + ' ' + model.LastName,
+                Age = model.Age
+            };
+            await _repository.DeleteAsync(entity);
         }
 
-        public Task<UserModel> Get(int id)
+        public async Task<UserModel> Get(int id)
         {
-            throw new NotImplementedException();
+            UserEntity entity = await _repository.GetAsync(id);
+            string[] names = entity.Name.Split(' ');
+            return new UserModel
+            {
+                Id = entity.Id,
+                FirstName = names[0],
+                LastName = names[1],
+                Age = entity.Age
+            };
         }
 
-        public Task<IList<UserModel>> GetAll()
+        public IList<UserModel> GetAll()
         {
-            throw new NotImplementedException();
+            IList<UserModel> result = new List<UserModel>();
+            IList<UserEntity> entities = _repository.GetAll();
+
+            foreach(UserEntity entity in entities)
+            {
+                string[] names = entity.Name.Split(' ');
+                result.Add(new UserModel
+                {
+                    Id = entity.Id,
+                    FirstName = names[0],
+                    LastName = names[1],
+                    Age = entity.Age
+                });
+            }
+
+            return result;
         }
 
-        public Task Update(UserModel model)
+        public void Update(UserModel model)
         {
-            throw new NotImplementedException();
+            _repository.Update(new UserEntity
+            {
+                Id = model.Id,
+                Name = model.FirstName + ' ' + model.LastName,
+                Age = model.Age
+            });
         }
     }
 }

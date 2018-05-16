@@ -23,13 +23,13 @@ namespace adminServer.Domain.Implementation
             await _context.SaveChangesAsync();
         }
 
-        public async Task Delete(UserEntity model)
+        public async Task DeleteAsync(UserEntity model)
         {
             _context.Users.Remove(model);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<UserEntity> Get(int id)
+        public async Task<UserEntity> GetAsync(int id)
         {
             return await _context.Users.FindAsync(id);
         }
