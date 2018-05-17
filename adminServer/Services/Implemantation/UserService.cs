@@ -29,10 +29,9 @@ namespace adminServer.Services.Implementation
 
         public async Task Delete(int id)
         {
-            UserEntity entity = new UserEntity
-            {
-                Id = id
-            };
+            UserEntity entity = await _repository.GetAsync(id);
+            if (entity == null)
+                return;
             await _repository.DeleteAsync(entity);
         }
 

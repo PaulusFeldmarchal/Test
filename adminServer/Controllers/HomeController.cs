@@ -21,14 +21,13 @@ namespace adminServer.Controllers
 
         public async Task<IActionResult> Index() 
         {
-            ViewData["Users"] = await _service.GetAll();
-            return View();
+            return View(await _service.GetAll());
         }
 
         public async Task<IActionResult> Delete(int id)
         {
             await _service.Delete(id);
-            return RedirectPermanent("~/Home/Index"); ;
+            return Redirect("~/");
         }
     }
 }

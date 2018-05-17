@@ -1,29 +1,186 @@
 ﻿@using adminServer.Models;
 
-@model adminServer.Models.UserModel;
+
+@model IList<UserModel>;
 
 @{
     ViewData["Title"] = "Home Page";
-    var users = ViewData["Users"] as IList<UserModel>;
 }
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-<div>
-    <table>
-        @foreach (UserModel user in users)
-        {
+<div class="wrapper">
+    <button id="addBtn">Add</button>
+    <div id="modalAdd" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span><br /><br />
+            <form method="POST">
+                <label>First name:</label>
+                <br />
+                <input type="text" name="firstName">
+                <br />
+                <br />
+                <label>Last name:</label>
+                <br />
+                <input type="text" name="lastName">
+                <br />
+                <br />
+                <label>Age:</label>
+                <br />
+                <input type="number" name="age">
+                <br />
+                <br />
+                <input type="submit" value="Add">
+            </form>
+        </div>
+    </div>
+    <div id="modalEdit" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span><br /><br />
+            <form method="POST">
+                <label>First name:</label>
+                <br />
+                <input type="text" name="firstNameE">
+                <br />
+                <br />
+                <label>Last name:</label>
+                <br />
+                <input type="text" name="lastNameE">
+                <br />
+                <br />
+                <label>Age:</label>
+                <br />
+                <input type="number" name="ageE">
+                <br />
+                <br />
+                <input type="submit" value="Edit">
+            </form>
+        </div>
+    </div>
+    <button>Sync</button>
+    <div>
+        <table>
+            <! some realization cs code>
             <tr>
-                <td>@user.FirstName</td>
-                <td>@user.LastName</td>
-                <td>@user.Age</td>
-                <td>
-                    <form action="/Home/Delete" >
-                        <input name="id" type="hidden" value="@user.Id" />    <p>
-                            <input type="submit" value="Delete" />
-                        </p>
-                    </form>
-                </td>
+                <th colspan="2">
+                    Name
+                </th>
+                <th>
+                    Age
+                </th>
+                <th>
+                    Actions
+                </th>
             </tr>
-        }
-    </table>
+            @foreach (UserModel user in Model)
+            {
+                <tr>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.Age</td>
+                    <td>
+                        <label id="editBtn" class="laberRef">edit</label> |
+                        <label href="./Home/Delete?id=@user.Id" class="laberRef">delete</label>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
 </div>
+
+<style>
+
+    .laberRef {
+        color: #000;
+    }
+
+        .laberRef:hover {
+            color: blue;
+        }
+
+        .laberRef:active {
+            color: red;
+        }
+
+    td {
+        background-color: #fff;
+        text-align: center;
+    }
+
+    th {
+        text-align: center
+    }
+
+    table {
+        background-color: #eee;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .wrapper {
+        padding: 10px;
+        max-width: 40%;
+        background: #ddd;
+        margin: auto;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 160px;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+</style>
+<script>
+    var modal = document.getElementById('modalAdd');
+    var modal1 = document.getElementById('modalEdit');
+    var btn = document.getElementById("addBtn");
+    var btn1 = document.getElementById("editBtn");
+    var span = document.getElementsByClassName("close")[0];
+    var span1 = document.getElementsByClassName("close")[1];
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+    btn1.onclick = function () {
+        modal1.style.display = "block";
+    }
+    span1.onclick = function () {
+        modal1.style.display = "none";
+    }
+    window.onclick = function (event) {
+        if (event.target == modal || event.target == modal1) {
+            modal.style.display = "none";
+            modal1.style.display = "none";
+        }
+    }
+</script>
