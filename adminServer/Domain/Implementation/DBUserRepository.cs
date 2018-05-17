@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace adminServer.Domain.Implementation
 {
-    public class DBRepository : IRepository
+    public class DBUserRepository : IUserRepository
     {
         private readonly ApplicationContext _context;
 
-        public DBRepository(ApplicationContext context)
+        public DBUserRepository(ApplicationContext context)
         {
             _context = context;
         }

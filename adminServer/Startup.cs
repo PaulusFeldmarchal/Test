@@ -31,7 +31,7 @@ namespace adminServer
             string connectionString = Environment.GetEnvironmentVariable("connectionString");
             services.AddDbContext<ApplicationContext>(options => 
                 options.UseSqlServer(connectionString));
-            services.AddScoped<IRepository, DBRepository>();
+            services.AddScoped<IUserRepository, DBUserRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ApplicationContext>();
         }

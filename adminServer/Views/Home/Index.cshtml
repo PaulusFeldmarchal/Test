@@ -7,8 +7,10 @@
     ViewData["Title"] = "Home Page";
 }
 
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
 <div class="wrapper">
-    <button id="addBtn">Add</button>
+    <button id="addBtn" class="buttonGreen">Add</button>
     <div id="modalAdd" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span><br /><br />
@@ -55,7 +57,7 @@
             </form>
         </div>
     </div>
-    <button>Sync</button>
+    <button class="buttonGreen">Sync</button>
     <div>
         <table>
             <! some realization cs code>
@@ -77,8 +79,8 @@
                     <td>@user.LastName</td>
                     <td>@user.Age</td>
                     <td>
-                        <label id="editBtn" class="laberRef">edit</label> |
-                        <label href="./Home/Delete?id=@user.Id" class="laberRef">delete</label>
+                        <button id="editBtn" value="@user.Id" class="buttonGreen" style="width: 30%">edit</button>
+                        <button id="deleteBtn" value="@user.Id" class="buttonRed" style="width: 30%">delete</button>
                     </td>
                 </tr>
             }
@@ -86,41 +88,34 @@
     </div>
 
 </div>
-
 <style>
-
-    .laberRef {
-        color: #000;
+    tr:nth-child(even) {
+        background-color: #f0f0f0;
     }
 
-        .laberRef:hover {
-            color: blue;
-        }
-
-        .laberRef:active {
-            color: red;
-        }
-
     td {
-        background-color: #fff;
+        border-bottom: 1px solid #ddd;
         text-align: center;
     }
 
     th {
+        border-bottom: 1px solid #ddd;
         text-align: center
     }
 
     table {
-        background-color: #eee;
+        background-color: #f4f4f4;
         width: 100%;
         margin-top: 10px;
+        border-collapse: collapse;
     }
 
     .wrapper {
         padding: 10px;
         max-width: 40%;
-        background: #ddd;
+        min-width: 300px;
         margin: auto;
+        border: 1px solid lightgray;
     }
 
     .modal {
@@ -157,30 +152,81 @@
             text-decoration: none;
             cursor: pointer;
         }
+
+    .buttonRed {
+        background-color: #fff; /* Green */
+        border: 2px solid #f44336;
+        color: black;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        transition-duration: 0.2s;
+        border-radius: 2px;
+    }
+
+        .buttonRed:hover {
+            background-color: #f44336; /* Green */
+            color: white;
+        }
+
+    .buttonGreen {
+        background-color: #fff; /* Green */
+        color: black;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        transition-duration: 0.2s;
+        border: 2px solid #4CAF50;
+        border-radius: 2px;
+    }
+
+        .buttonGreen:hover {
+            background-color: #4CAF50; /* Green */
+            color: white;
+        }
 </style>
 <script>
-    var modal = document.getElementById('modalAdd');
-    var modal1 = document.getElementById('modalEdit');
-    var btn = document.getElementById("addBtn");
-    var btn1 = document.getElementById("editBtn");
-    var span = document.getElementsByClassName("close")[0];
-    var span1 = document.getElementsByClassName("close")[1];
-    btn.onclick = function () {
-        modal.style.display = "block";
+    var modalAdd = document.getElementById('modalAdd');
+    var modalEdit = document.getElementById('modalEdit');
+    var btnAdd = document.getElementById("addBtn");
+    var btnEdit = document.getElementById("editBtn");
+    var spanForAddModal = document.getElementsByClassName("close")[0];
+    var spanForEditModal = document.getElementsByClassName("close")[1];
+
+    function doSomething(elem) {
+        var id = elem.children[0].value;
+
+        $.ajax({
+            url: "/Home/Delete",
+            type: "POST",
+            data: { id: id },
+            dataType: "json",
+            success: function () {
+                alert("YEEE");
+            }
+        });
     }
-    span.onclick = function () {
-        modal.style.display = "none";
+
+    btnAdd.onclick = function () {
+        modalAdd.style.display = "block";
     }
-    btn1.onclick = function () {
-        modal1.style.display = "block";
+    spanForAddModal.onclick = function () {
+        modalAdd.style.display = "none";
     }
-    span1.onclick = function () {
-        modal1.style.display = "none";
+    btnEdit.onclick = function () {
+        modalEdit.style.display = "block";
+    }
+    spanForEditModal.onclick = function () {
+        modalEdit.style.display = "none";
     }
     window.onclick = function (event) {
-        if (event.target == modal || event.target == modal1) {
-            modal.style.display = "none";
-            modal1.style.display = "none";
+        if (event.target == modalAdd || event.target == modalEdit) {
+            modalAdd.style.display = "none";
+            modalEdit.style.display = "none";
         }
     }
 </script>

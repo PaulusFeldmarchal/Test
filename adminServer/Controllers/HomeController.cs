@@ -24,6 +24,7 @@ namespace adminServer.Controllers
             return View(await _service.GetAll());
         }
 
+        [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
             await _service.Delete(id);
