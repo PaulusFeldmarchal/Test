@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace adminServer.Domain.Implementation
 {
-    public class DBUserRepository : IUserRepository
+    public class Repository : IRepository
     {
         private readonly ApplicationContext _context;
 
-        public DBUserRepository(ApplicationContext context)
+        public Repository(ApplicationContext context)
         {
             _context = context;
         }
@@ -35,7 +35,7 @@ namespace adminServer.Domain.Implementation
             return await _context.Users.FindAsync(id);
         }
 
-        public async Task<IList<UserEntity>> GetAll()
+        public async Task<IEnumerable<UserEntity>> GetAll()
         {
             return await _context.Users.ToListAsync();
         }

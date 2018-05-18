@@ -11,9 +11,9 @@ namespace adminServer.Services.Implementation
 {
     public class UserService : IUserService
     {
-        private readonly IUserRepository _repository;
+        private readonly IRepository _repository;
 
-        public UserService(IUserRepository repository)
+        public UserService(IRepository repository)
         {
             _repository = repository;
         }
@@ -48,10 +48,10 @@ namespace adminServer.Services.Implementation
             };
         }
 
-        public async Task<IList<UserModel>> GetAll()
+        public async Task<IEnumerable<UserModel>> GetAll()
         {
             IList<UserModel> result = new List<UserModel>();
-            IList<UserEntity> entities = await _repository.GetAll();
+            IEnumerable<UserEntity> entities = await _repository.GetAll();
 
             foreach(UserEntity entity in entities)
             {
@@ -70,12 +70,12 @@ namespace adminServer.Services.Implementation
 
         public async Task Update(UserModel model)
         {
-            await _repository.Update(new UserEntity
-            {
-                Id = model.Id,
-                Name = model.FirstName + ' ' + model.LastName,
-                Age = model.Age
-            });
+            UserEntity entity = await _repository.GetAsync(model.Id);
+            entity.Name = model.FirstName + ' ' + model.LastName;
+            entity.Age = model.Age;
+
+            await _repository.Update(entity);
+
         }
     }
 }

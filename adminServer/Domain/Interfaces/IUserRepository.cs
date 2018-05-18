@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace adminServer.Domain.Interfaces
 {
-    public interface IUserRepository
+    public interface IRepository
     {
         Task<IList<UserEntity>> GetAll();
         Task<UserEntity> GetAsync(int id);

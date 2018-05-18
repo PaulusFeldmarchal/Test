@@ -31,9 +31,9 @@ namespace adminServer
             string connectionString = Environment.GetEnvironmentVariable("connectionString");
             services.AddDbContext<ApplicationContext>(options => 
                 options.UseSqlServer(connectionString));
-            services.AddScoped<IUserRepository, DBUserRepository>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<ApplicationContext>();
+            services.AddTransient<IRepository, Repository>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ApplicationContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

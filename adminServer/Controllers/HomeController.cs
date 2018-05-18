@@ -24,11 +24,32 @@ namespace adminServer.Controllers
             return View(await _service.GetAll());
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetUser(int id)
+        {
+            UserModel element = await _service.Get(id);
+            return Json(element);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
             await _service.Delete(id);
-            return Redirect("~/");
+            return Json("Element deleted!");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(UserModel model)
+        {
+            await _service.Update(model);
+            return Json("Element changed!");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(UserModel model)
+        {
+            await _service.Add(model);
+            return Json("Element Added!");
         }
     }
 }
