@@ -1,7 +1,7 @@
 ﻿@using adminServer.Models;
 
 
-@model IList<UserModel>;
+@model IEnumerable<UserModel>;
 
 @{
     ViewData["Title"] = "Home Page";
@@ -61,7 +61,7 @@
             </form>
         </div>
     </div>
-    <button class="buttonGreen">Sync</button>
+    <button id="syncBtn" class="buttonGreen">Sync</button>
     <div>
         <table id="dataContent">
             <tr>

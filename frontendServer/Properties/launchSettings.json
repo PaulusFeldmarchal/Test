@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:53709/",
+      "applicationUrl": "http://localhost:9292/",
       "sslPort": 0
     }
   },
@@ -12,7 +12,7 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "connectionString": "\"Server=DESKTOP-2FC63SQ;Database=frontendserverdb;Trusted_Connection=True;\"",
+        "connectionString": "Server=DESKTOP-2FC63SQ;Database=frontendserverdb;Trusted_Connection=True;",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },

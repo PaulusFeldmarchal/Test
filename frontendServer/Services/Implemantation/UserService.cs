@@ -1,13 +1,13 @@
-﻿using adminServer.Domain.Interfaces;
-using adminServer.Domain.Entities;
-using adminServer.Models;
+﻿using frontendServer.Domain.Interfaces;
+using frontendServer.Domain.Entities;
+using frontendServer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using adminServer.Services.Interfaces;
+using frontendServer.Services.Interfaces;
 
-namespace adminServer.Services.Implementation
+namespace frontendServer.Services.Implementation
 {
     public class UserService : IUserService
     {
@@ -36,6 +36,11 @@ namespace adminServer.Services.Implementation
             await _repository.DeleteAsync(entity);
         }
 
+        public async Task DeleteAll()
+        {
+            await _repository.DeleteAllAsync();
+        }
+
         public async Task<UserModel> Get(int id)
         {
             var entity = await _repository.GetAsync(id);
@@ -55,8 +60,7 @@ namespace adminServer.Services.Implementation
         public async Task<IEnumerable<UserModel>> GetAll()
         {
             var entities = await _repository.GetAll();
-            var result = entities.Select(entity => new UserModel
-            {
+            var result = entities.Select(entity => new UserModel {
                 Id = entity.Id,
                 FirstName = entity.Name.Split(' ')[0],
                 LastName = entity.Name.Split(' ')[1],

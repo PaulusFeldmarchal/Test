@@ -10,10 +10,18 @@ $("#closeEditModal").click(function () {
 });
 
 $(window).click(function (event) {
-    if (event.target == $("#modalAdd").get(0) || event.target == $("#modalEdit").get(0)) {
+    if (event.target === $("#modalAdd").get(0) || event.target === $("#modalEdit").get(0)) {
         $("#modalAdd").css("display", "none");
         $("#modalEdit").css("display", "none");
     }
+});
+
+$("#syncBtn").click(function () {/////
+    event.preventDefault();
+    $.ajax({
+        url: "/Sync",
+        type: "POST"
+    });
 });
 
 $("#addForm").submit(function (event) {

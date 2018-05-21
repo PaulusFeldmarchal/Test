@@ -1,10 +1,10 @@
-﻿using adminServer.Domain.Entities;
+﻿using frontendServer.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace adminServer.Domain.Interfaces
+namespace frontendServer.Domain.Interfaces
 {
     public interface IUserRepository
     {
@@ -13,5 +13,6 @@ namespace adminServer.Domain.Interfaces
         Task Update(UserEntity model);
         Task AddAsync(UserEntity model);
         Task DeleteAsync(UserEntity model);
+        Task DeleteAllAsync();
     }
 }

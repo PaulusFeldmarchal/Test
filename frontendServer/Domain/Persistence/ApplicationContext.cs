@@ -1,16 +1,16 @@
-﻿using adminServer.Domain.Entities;
+﻿using frontendServer.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace adminServer.Domain.Persistence
+namespace frontendServer.Domain.Persistence
 {
-    class TestContext : DbContext
+    public class ApplicationContext : DbContext
     {
         public DbSet<UserEntity> Users { get; set; }
-        public TestContext(DbContextOptions<TestContext> options)
+        public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options) { }
     }
 }

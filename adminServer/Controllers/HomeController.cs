@@ -31,6 +31,12 @@ namespace adminServer.Controllers
             return Json(element);
         }
 
+        [HttpGet]
+        public async Task<ActionResult> GetAll()
+        {
+            return Json(await _service.GetAll());
+        }
+
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {

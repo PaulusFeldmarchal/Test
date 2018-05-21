@@ -21,7 +21,6 @@ namespace adminServer
             WebHost.CreateDefaultBuilder(args)
                 .UseKestrel()
             .UseIISIntegration()
-
                 .UseUrls("http://0.0.0.0:9191")
                 .UseStartup<Startup>()
                 .Build();

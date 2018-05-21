@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using adminServer.Domain.Persistence;
+using frontendServer.Domain.Implementation;
+using frontendServer.Domain.Interfaces;
+using frontendServer.Domain.Persistence;
+using frontendServer.Services.Implementation;
+using frontendServer.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -25,8 +29,12 @@ namespace frontendServer
         {
             services.AddMvc();
             string connectionString = Environment.GetEnvironmentVariable("connectionString");
-            services.AddDbContext<TestContext>(options =>
+            services.
+                AddTransient<ApplicationContext>().
+                AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(connectionString));
+            services.AddTransient<IUserRepository, Repository>();
+            services.AddTransient<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

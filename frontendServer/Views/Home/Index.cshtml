@@ -1,7 +1,36 @@
-﻿@{
+﻿@using frontendServer.Models;
+
+
+@model IEnumerable<UserModel>;
+
+@{
     ViewData["Title"] = "Home Page";
 }
+<link rel="stylesheet" href="~/css/site.css" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
-<div>
-    dsds
+<div class="wrapper">
+    <div>
+        <table id="dataContent">
+            <tr>
+                <th colspan="2">
+                    <label>Name</label>
+                </th>
+                <th>
+                    <label>Age</label>
+                </th>
+            </tr>
+            @foreach (UserModel user in Model)
+            {
+                <tr>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.Age</td>
+                </tr>
+            }
+        </table>
+    </div>
+
 </div>
+
+<script src="~/js/site.js"></script>

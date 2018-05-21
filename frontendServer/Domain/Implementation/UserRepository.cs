@@ -1,13 +1,13 @@
-﻿using adminServer.Domain.Entities;
-using adminServer.Domain.Interfaces;
-using adminServer.Domain.Persistence;
+﻿using frontendServer.Domain.Entities;
+using frontendServer.Domain.Interfaces;
+using frontendServer.Domain.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace adminServer.Domain.Implementation
+namespace frontendServer.Domain.Implementation
 {
     public class Repository : IUserRepository
     {
@@ -43,6 +43,12 @@ namespace adminServer.Domain.Implementation
 
         public async Task Update(UserEntity model)
         {
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAllAsync()
+        {
+            _context.Users.RemoveRange(await GetAll());
             await _context.SaveChangesAsync();
         }
     }

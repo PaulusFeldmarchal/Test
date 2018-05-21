@@ -27,11 +27,12 @@ namespace adminServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddMvc();
             string connectionString = Environment.GetEnvironmentVariable("connectionString");
             services.AddDbContext<ApplicationContext>(options => 
                 options.UseSqlServer(connectionString));
-            services.AddTransient<IRepository, Repository>();
+            services.AddTransient<IUserRepository, Repository>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ApplicationContext>();
         }
@@ -50,12 +51,16 @@ namespace adminServer
 
             app.UseStaticFiles();
 
+            app.UseCors(builder => builder.WithOrigins("http://localhost:9292"));
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            
         }
     }
 }
